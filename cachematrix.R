@@ -1,7 +1,11 @@
-## Put comments here that give an overall description of what your
-## functions do
+##This files contains the functions makeCacheMatrix and Cachesolve.
+##The purpose of makeCacheMatrix is to create a matrix and caches its inverse
+## The second function calculates the inverse of the matrix, but
+## first checks to see if the inverse has already been calculated and
+##is in the cache.
 
-## Write a short comment describing this function
+#makeCacheMatrix stores the matrix "x" and its inverse in the cache
+
 
 makeCacheMatrix <- function(x = matrix()) {
 
@@ -19,8 +23,24 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+#Cachesolve is a function that returns the inverse of the matrix x.
+#It checks for the value in the cache if it has previously
+#been computed. If not, then the value is computed and stored
+#in the cache.
 
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+cacheSolve <- function (x, ...) {
+    # check for inverse in the cache
+    I <-x$getInverse()
+    
+    if(!is.null(I)) {
+        return(I)  #if in cache, simply return it
+    }
+
+    else {
+        a <-x$get()
+        I <-solve(A)
+        x$setInverse(I)
+        
+        I
+    }
 }
